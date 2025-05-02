@@ -45,7 +45,7 @@ function draw() {
   pop(); // 恢復畫布的原始狀態
 
   // 將 graphics 畫布顯示在攝影機影像的上方
- // image(graphics, (width - graphics.width) / 2, (height - capture.height) / 2 - graphics.height);
+  image(graphics, (width - graphics.width) / 2, (height - capture.height) / 2 - graphics.height);
 }
 
 function windowResized() {

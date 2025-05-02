@@ -13,42 +13,44 @@ function setup() {
 
   // 使用 createGraphics 產生一個與攝影機影像相同大小的畫布
   graphics = createGraphics(capture.width, capture.height);
-  graphics.background(0); // 設定 graphics 的背景顏色為黑色
+  graphics.clear(); // 確保 graphics 初始為透明
 }
 
 function draw() {
   background('#0077b6'); // 確保背景顏色維持為 #0077b6
 
-  // 在 graphics 上繪製圓形，顏色取自 capture 的相對位置
-  graphics.clear(); // 清除之前的繪製內容
-  graphics.background(0); // 設定背景為黑色
-  for (let x = 0; x < graphics.width; x += 20) {
-    for (let y = 0; y < graphics.height; y += 20) {
-      // 從 capture 中取樣顏色
-      let col = capture.get(x, y);
-      graphics.fill(col);
-      graphics.noStroke();
-      graphics.ellipse(x + 10, y + 10, 15, 15); // 繪製寬高為 15 的圓形
-    }
-  }
+  // 計算影像置中的位置
+  let x = (width - capture.width) / 2;
+  let y = (height - capture.height) / 2;
 
   // 水平翻轉畫布
   push();
   translate(width, 0); // 將畫布的原點移到右上角
   scale(-1, 1); // 水平翻轉畫布
 
-  // 將攝影機影像顯示在畫布中央
-  let x = (width - capture.width) / 2;
-  let y = (height - capture.height) / 2;
-  image(capture, x, y, capture.width, capture.height);
+  // 將攝影機影像繪製在畫布上，並置中
+  image(capture, -x - capture.width, y, capture.width, capture.height);
 
   pop(); // 恢復畫布的原始狀態
 
+  // 在 graphics 上繪製圓形，顏色取自 capture 的相對位置
+  graphics.clear(); // 清除之前的繪製內容
+  for (let gx = 0; gx < graphics.width; gx += 20) {
+    for (let gy = 0; gy < graphics.height; gy += 20) {
+      // 從 capture 中取樣顏色
+      let col = capture.get(gx, gy);
+      graphics.fill(col);
+      graphics.noStroke();
+      graphics.ellipse(gx + 10, gy + 10, 15, 15); // 繪製寬高為 15 的圓形
+    }
+  }
+
   // 將 graphics 畫布顯示在攝影機影像的上方
-  image(graphics, (width - graphics.width) / 2, (height - capture.height) / 2 - graphics.height);
+  image(graphics, x, y, capture.width, capture.height);
 }
 
 function windowResized() {
   // 當視窗大小改變時，重新調整畫布大小
   resizeCanvas(windowWidth, windowHeight);
+  capture.size(windowWidth * 0.8, windowHeight * 0.8); // 同步調整攝影機影像大小
 }

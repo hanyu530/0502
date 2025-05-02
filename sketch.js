@@ -14,10 +14,17 @@ function setup() {
 function draw() {
   background('#0077b6'); // 確保背景顏色維持為 #0077b6
 
+  // 水平翻轉畫布
+  push();
+  translate(width, 0); // 將畫布的原點移到右上角
+  scale(-1, 1); // 水平翻轉畫布
+
   // 將攝影機影像顯示在畫布中央
   let x = (width - capture.width) / 2;
   let y = (height - capture.height) / 2;
   image(capture, x, y, capture.width, capture.height);
+
+  pop(); // 恢復畫布的原始狀態
 }
 
 function windowResized() {

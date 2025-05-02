@@ -23,7 +23,7 @@ function draw() {
   let x = (width - capture.width) / 2;
   let y = (height - capture.height) / 2;
 
-  // 在 graphics 上繪製黑色背景和圓形濾鏡效果
+  // 在 graphics 上繪製黑色背景和方框濾鏡效果
   graphics.background(0); // 確保背景為黑色
 
   // 水平翻轉 graphics 畫布
@@ -37,7 +37,11 @@ function draw() {
       let col = capture.get(gx, gy);
       graphics.fill(col);
       graphics.noStroke();
-      graphics.ellipse(gx + 10, gy + 10, 15, 15); // 繪製寬高為 15 的圓形
+      graphics.rect(gx, gy, 18, 18); // 繪製寬高為 18 的方框
+
+      // 在方框中間繪製黑色圓
+      graphics.fill(0); // 設定顏色為黑色
+      graphics.ellipse(gx + 9, gy + 9, 5, 5); // 繪製直徑為 5 的圓
     }
   }
 

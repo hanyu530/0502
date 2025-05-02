@@ -25,6 +25,12 @@ function draw() {
 
   // 在 graphics 上繪製黑色背景和圓形濾鏡效果
   graphics.background(0); // 確保背景為黑色
+
+  // 水平翻轉 graphics 畫布
+  graphics.push();
+  graphics.translate(graphics.width, 0); // 將原點移到右上角
+  graphics.scale(-1, 1); // 水平翻轉畫布
+
   for (let gx = 0; gx < graphics.width; gx += 20) {
     for (let gy = 0; gy < graphics.height; gy += 20) {
       // 從 capture 中取樣顏色
@@ -34,6 +40,8 @@ function draw() {
       graphics.ellipse(gx + 10, gy + 10, 15, 15); // 繪製寬高為 15 的圓形
     }
   }
+
+  graphics.pop(); // 恢復 graphics 畫布的原始狀態
 
   // 水平翻轉畫布
   push();

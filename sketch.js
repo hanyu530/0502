@@ -13,15 +13,24 @@ function setup() {
 
   // 使用 createGraphics 產生一個與攝影機影像相同大小的畫布
   graphics = createGraphics(capture.width, capture.height);
-  graphics.background(255, 0, 0); // 設定 graphics 的背景顏色為紅色（可自行調整）
-  graphics.fill(255);
-  graphics.textSize(32);
-  graphics.textAlign(CENTER, CENTER);
-  graphics.text('Graphics Layer', graphics.width / 2, graphics.height / 2); // 在 graphics 上繪製文字
+  graphics.background(0); // 設定 graphics 的背景顏色為黑色
 }
 
 function draw() {
   background('#0077b6'); // 確保背景顏色維持為 #0077b6
+
+  // 在 graphics 上繪製圓形，顏色取自 capture 的相對位置
+  graphics.clear(); // 清除之前的繪製內容
+  graphics.background(0); // 設定背景為黑色
+  for (let x = 0; x < graphics.width; x += 20) {
+    for (let y = 0; y < graphics.height; y += 20) {
+      // 從 capture 中取樣顏色
+      let col = capture.get(x, y);
+      graphics.fill(col);
+      graphics.noStroke();
+      graphics.ellipse(x + 10, y + 10, 15, 15); // 繪製寬高為 15 的圓形
+    }
+  }
 
   // 水平翻轉畫布
   push();

@@ -24,7 +24,7 @@ function draw() {
   scale(-1, 1); // 水平翻轉畫布
 
   // 將攝影機影像繪製在畫布上，並置中
-  image(capture, -x - capture.width, y, capture.width, capture.height);
+//  image(capture, -x - capture.width, y, capture.width, capture.height);
 
   pop(); // 恢復畫布的原始狀態
 }

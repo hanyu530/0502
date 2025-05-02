@@ -40,12 +40,12 @@ function draw() {
   // 將攝影機影像顯示在畫布中央
   let x = (width - capture.width) / 2;
   let y = (height - capture.height) / 2;
-  //image(capture, x, y, capture.width, capture.height);
+  image(capture, x, y, capture.width, capture.height);
 
   pop(); // 恢復畫布的原始狀態
 
   // 將 graphics 畫布顯示在攝影機影像的上方
-  image(graphics, (width - graphics.width) / 2, (height - capture.height) / 2 - graphics.height);
+ // image(graphics, (width - graphics.width) / 2, (height - capture.height) / 2 - graphics.height);
 }
 
 function windowResized() {
